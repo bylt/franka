@@ -2,7 +2,7 @@
 
 Franka's goal is to bring unity into the fragmented world of software development. It provides a platform where software developers, business users and machines can collaborate as equal partners with different strengths but a common goal. Software developers bring their technical expertise, business users provide domain knowledge and machines write flawless code.
 
-## Principles
+## Core Principles
 
 ### Stop inventing, start integrating
 
