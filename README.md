@@ -1,9 +1,10 @@
 # Franka
 
 Franka's goal is to bring unity into the fragmented world of software development. It provides a platform where software 
-developers, business users and machines can collaborate as equal partners with different strengths but a common goal. 
-Software developers bring their technical expertise, business users provide domain knowledge and machines write flawless 
-code.
+developers, business users and machines can collaborate as equal partners who have different strengths but a common goal.
+ 
+> Software developers bring their technical expertise, business users provide domain knowledge and machines write flawless 
+> code.
 
 ## Core Principles
 
@@ -14,10 +15,10 @@ different environments. We don't invent new things, we innovate through integrat
 
 ### Embrace the change
 
-Everybody knows that our world is constantly changing yet to this day programming languages are built without first 
-class support for it. Our tools assume that the world is static and change is handled externally using release 
-processes. Franka is different! It provides primitives for making atomic changes to your application much like in a 
-relational database where you can gradually alter the existing schema instead of just redefining it.
+Even though our world is changing at an ever increasing pace the programming languages we use assume that it's static. 
+As a result we are forced to handle changes externally using complex release processes. Franka is different! It provides 
+primitives for making atomic changes to your application much like in a relational database where you can gradually 
+alter a schema instead of releasing a completely new version every time.
 
 
 
