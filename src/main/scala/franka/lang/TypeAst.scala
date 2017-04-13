@@ -10,14 +10,17 @@ object TypeAst extends Ast {
     case class ModuleType (children : Map [Name, Type]) extends Type
 
     sealed trait ProductType extends Type
-    case class TupleType (elems : Vector [Type]) extends ProductType
-    case class RecordType (fields : Map [Name, Type]) extends ProductType
+    case class TupleType (elems : Exp*) extends ProductType
+    case class RecordType (fields : (Name, Exp)*) extends ProductType
 
     sealed trait SumType extends Type
-    case class TaggedUnionType (subTypes : Map [Name, Type]) extends SumType
+    case class UnboundUnionType (caseLookup: PartialFunction [Name, Exp]) extends SumType
+    case class EnumeratedUnionType (cases : (Name, Exp)*) extends SumType
 
-    case class FunctionType (from : Type, to : Type) extends Type
+    case class FunctionType (from : Exp, to : Exp) extends Type
 
     case class UnitType (value : ValueAst.Value) extends Type
+
+    case object BottomType extends Type
 
 }
