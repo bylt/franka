@@ -6,15 +6,15 @@ import franka.lang.TypeAst._
 package object sdk {
 
     val booleanType =
-        EnumeratedUnionType (
-            'true  -> Literal (UnitType (ValueAst.BooleanValue (true))),
-            'false -> Literal (UnitType (ValueAst.BooleanValue (false)))
+        TaggedUnionType (
+            'true  -> Literal (???),
+            'false -> Literal (???)
         )
 
     val integerType =
-        UnboundUnionType {
+        IndexedUnionType {
             case Name (Vector (symbol)) if ??? =>
-                Literal (UnitType (ValueAst.DecimalValue (symbol.toInt)))
+                Literal (???)
         }
 
     val decimalType =
@@ -26,7 +26,7 @@ package object sdk {
     val optionType =
         Lambda (
             'elemType,
-            Literal (EnumeratedUnionType (
+            Literal (TaggedUnionType (
                 'some -> Ident ('elemType),
                 'none -> Literal (BottomType)
             ))
