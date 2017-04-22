@@ -41,11 +41,11 @@ abstract class Ast {
 
     case class Lambda (argName : Name, body : Exp) extends Exp
 
-    /** A [[Select]] node allows you to select a specific field of a [[TypeAst.ProductType]] value.
+    /** A [[Select]] node allows you to select a specific field of a [[TypeAst.TaggedProduct]] value.
       * @param target the target expression
-      * @param name the name of the field to select
+      * @param tag the name of the field to select
       */
-    case class Select (target : Exp, name : Name) extends Exp
+    case class Select (target : Exp, tag : Name) extends Exp
 
     object Select {
 
@@ -83,34 +83,13 @@ abstract class Ast {
 
     }
 
-    /** A [[Branch]] node allows you to branch out based on a [[TypeAst.SumType]] value.
-      * @param target the target expression, should be of [[TypeAst.SumType]]
-      * @param map the tag to expression mapping
+    /** A [[Branch]] node allows you to branch out based on a [[TypeAst.TaggedSum]] value.
+      * @param target the target expression, should be of [[TypeAst.TaggedSum]]
+      * @param cases the tag to expression mapping
       */
-    case class Branch (target : Exp, map : (Name, Exp)*) extends Exp
+    case class Branch (target : Exp, cases : (Name, Exp)*) extends Exp
 
     case class Let (binding : (Name, Exp), in : Exp) extends Exp
-
-    // sdk => sdk.int.add sdk.int.type.1 sdk.int.type.2
-    // ModuleType => FunctionType (sdk.int.type, sdk.int.type, sdk.int.type) sdk.int.type sdk.int.type
-    Lambda ('sdk, Apply (Select.Names ('sdk, 'int, 'add), Select.Names ('sdk, 'int, 'type, 'one)))
-
-    object sdk {
-        object int {
-            def add (a : BigInt, b : BigInt) : BigInt = a + b
-            def apply (x : String) : BigInt = BigInt (x)
-        }
-        object bool {
-            def `true` : Int = 1
-            def `false` : Int = 0
-            def and (a : Int, b : Int) : Int = a * b
-            def or (a : Int, b : Int) : Int = (a + b).signum
-        }
-    }
-
-    sdk.int.add (sdk.int ("1"), sdk.int ("2"))
-
-    sdk.bool.and (sdk.bool.`true`, sdk.bool.`false`)
 
 }
 

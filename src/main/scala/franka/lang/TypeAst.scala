@@ -7,19 +7,15 @@ object TypeAst extends Ast {
 
     sealed trait Type
 
-    sealed trait ProductType extends Type
-    case class ModuleType (children : Map [Name, Exp]) extends ProductType
-    case class TupleType (elems : Exp*) extends ProductType
-    case class RecordType (fields : (Name, Exp)*) extends ProductType
+    case object Zero extends Type
+    case class Unit () extends Type
 
-    sealed trait SumType extends Type
-    case class IndexedUnionType (caseLookup : PartialFunction [Name, Exp]) extends SumType
-    case class TaggedUnionType (cases : (Name, Exp)*) extends SumType
+    case class TaggedSum (subTypes : Map [Name, Exp]) extends Type
+    case class IndexedSum (getSubType : Int => Exp) extends Type
 
-    case class FunctionType (from : Exp, to : Exp) extends Type
+    case class TaggedProduct (subTypes : Map [Name, Exp]) extends Type
+    case class IndexedProduct (getSubType : Int => Exp) extends Type
 
-    //case class UnitType (value : ValueAst.Value) extends Type
-
-    case object BottomType extends Type
+    case class Function (from : Exp, to : Exp) extends Type
 
 }

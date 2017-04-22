@@ -6,30 +6,30 @@ import franka.lang.TypeAst._
 package object sdk {
 
     val booleanType =
-        TaggedUnionType (
-            'true  -> Literal (???),
-            'false -> Literal (???)
-        )
+        TaggedSum (Map (
+            'true  -> Literal (Unit ()),
+            'false -> Literal (Unit ())
+        ))
 
     val integerType =
-        IndexedUnionType {
-            case Name (Vector (symbol)) if ??? =>
-                Literal (???)
+        IndexedSum {
+            index =>
+                Literal (Unit ())
         }
 
     val decimalType =
-        RecordType (
+        TaggedProduct (Map (
             'unscaled_value -> Literal (integerType),
             'scale          -> Literal (integerType)
-        )
+        ))
 
     val optionType =
         Lambda (
             'elemType,
-            Literal (TaggedUnionType (
+            Literal (TaggedSum (Map (
                 'some -> Ident ('elemType),
-                'none -> Literal (BottomType)
-            ))
+                'none -> Literal (Zero)
+            )))
         )
 
 }
