@@ -1,5 +1,12 @@
 # Franka
 
+Franka is a portable programming language implemented as a library. While this approach is unconventional it has many 
+advantages: 
+
+* There is no new syntax to learn (only a well-documented API).
+* Language bindings allow you to use it from any environment. 
+* Franka code can be generated or processed without any additional effort (no need for complex parsers).
+
 Franka's goal is to bring unity into the fragmented world of software development. It provides a platform where software 
 developers, business users and machines can collaborate as equal partners with different strengths but a common goal.
 
