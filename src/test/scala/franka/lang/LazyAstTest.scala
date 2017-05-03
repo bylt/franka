@@ -10,4 +10,10 @@ class LazyAstTest {
 //    val test =
 //        Literal (???)
 
+    franka.Name.parse
+
+    def x (franka : String) : Unit = {
+        _root_.franka.Name
+    }
+
 }
