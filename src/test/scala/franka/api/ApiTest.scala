@@ -32,9 +32,9 @@ class ApiTest {
     lib.newFunction ('xor, True, False, True)
     lib.newFunction ('xor, True, True, False)
 
-    lib.rule { (a, b) =>
-        Not (And (a, b)) ->
-            Or (Not (a), Not (b))
-    }
+//    lib.rule { (a, b) =>
+//        Not (And (a, b)) ->
+//            Or (Not (a), Not (b))
+//    }
 
 }
