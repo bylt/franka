@@ -7,8 +7,6 @@ object Types extends Ast {
 
     sealed trait Type
 
-    case class Module (childTypes : Map [Name, Exp]) extends Type
-
     case object Bottom extends Type
     case class Unit (path : Seq [Name]) extends Type
 
@@ -19,5 +17,7 @@ object Types extends Ast {
     case class Tuple (elems: Seq [Exp]) extends Type
 
     case class Function (from : Exp, to : Exp) extends Type
+
+    case class Module (childTypes : Map [Name, Exp]) extends Type
 
 }

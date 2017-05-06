@@ -86,13 +86,6 @@ abstract class Ast {
 
     }
 
-    /** A [[Branch]] node allows you to branch out based on a [[Types.TaggedSum]] value.
- *
-      * @param target the target expression, should be of [[Types.TaggedSum]]
-      * @param cases  the tag to expression mapping
-      */
-    case class Branch (target : Exp, cases : (Name, Exp)*) extends Exp
-
     case class Let (binding : (Name, Exp), in : Exp) extends Exp
 
 }

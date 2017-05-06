@@ -44,15 +44,6 @@ object model {
                 Apply (
                     Select.Names ('franka, 'lang, 'ast),
                     TaggedUnion (Seq (
-                        'module ->
-                            Record (Seq (
-                                'child_types ->
-                                    Apply.Curry (
-                                        Select.Names ('franka, 'sdk, 'map),
-                                        Select.Names ('franka, 'name),
-                                        Ident ('exp)
-                                    )
-                            )),
                         'bottom ->
                             Record (Seq.empty),
                         'unit ->
@@ -107,6 +98,15 @@ object model {
                                     Ident ('exp),
                                 'to ->
                                     Ident ('exp)
+                            )),
+                        'module ->
+                            Record (Seq (
+                                'child_types ->
+                                    Apply.Curry (
+                                        Select.Names ('franka, 'sdk, 'map),
+                                        Select.Names ('franka, 'name),
+                                        Ident ('exp)
+                                    )
                             ))
                     ))
                 ),

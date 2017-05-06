@@ -23,9 +23,9 @@ package object sdk {
     val optionType =
         Lambda (
             'elemType,
-            TaggedUnion (Seq (
-                'some -> Ident ('elemType),
-                'none -> Bottom
+            Union (Seq (
+                Ident ('elemType),
+                Bottom
             ))
         )
 
