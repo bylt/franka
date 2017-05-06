@@ -12,6 +12,8 @@ abstract class Ast {
 
     case class Literal (data : Data) extends Exp
 
+    implicit def dataToLiteral (data : Data) : Exp = Literal (data)
+
     case class Ident (name : Name) extends Exp
 
     case class Apply (fun : Exp, arg : Exp) extends Exp
@@ -41,7 +43,8 @@ abstract class Ast {
 
     case class Lambda (argName : Name, body : Exp) extends Exp
 
-    /** A [[Select]] node allows you to select a specific field of a [[TypeAst.TaggedProduct]] value.
+    /** A [[Select]] node allows you to select a specific field of a [[Types.Record]] value.
+      *
       * @param target the target expression
       * @param tag the name of the field to select
       */
@@ -83,9 +86,10 @@ abstract class Ast {
 
     }
 
-    /** A [[Branch]] node allows you to branch out based on a [[TypeAst.TaggedSum]] value.
-      * @param target the target expression, should be of [[TypeAst.TaggedSum]]
-      * @param cases the tag to expression mapping
+    /** A [[Branch]] node allows you to branch out based on a [[Types.TaggedSum]] value.
+ *
+      * @param target the target expression, should be of [[Types.TaggedSum]]
+      * @param cases  the tag to expression mapping
       */
     case class Branch (target : Exp, cases : (Name, Exp)*) extends Exp
 

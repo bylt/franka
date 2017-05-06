@@ -1,35 +1,32 @@
 package franka
 package lang
 
-import franka.lang.TypeAst._
+import franka.lang.Types._
 
 package object sdk {
 
     val booleanType =
-        TaggedSum (Map (
-            'true  -> Literal (Unit ()),
-            'false -> Literal (Unit ())
+        TaggedUnion (Seq (
+            'true  -> Literal (Unit (Seq ('franka, 'sdk, 'boolean, 'true))),
+            'false -> Literal (Unit (Seq ('franka, 'sdk, 'boolean, 'false)))
         ))
 
     val integerType =
-        IndexedSum {
-            index =>
-                Literal (Unit ())
-        }
+        Select.Names ('franka, 'sdk, 'integer)
 
     val decimalType =
-        TaggedProduct (Map (
-            'unscaled_value -> Literal (integerType),
-            'scale          -> Literal (integerType)
+        Record (Seq (
+            'unscaled_value -> integerType,
+            'scale          -> integerType
         ))
 
     val optionType =
         Lambda (
             'elemType,
-            Literal (TaggedSum (Map (
+            TaggedUnion (Seq (
                 'some -> Ident ('elemType),
-                'none -> Literal (Zero)
-            )))
+                'none -> Bottom
+            ))
         )
 
 }

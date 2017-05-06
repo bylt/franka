@@ -4,26 +4,26 @@ package dsl
 
 object Tests extends App {
 
-    val Integer = TypeAst.Select.Names ('sdk, 'integer)
+    val Integer = Types.Select.Names ('sdk, 'integer)
 
-    val Bool = TypeAst.Select.Names ('sdk, 'boolean)
-    val True = TypeAst.Select.Names ('sdk, 'boolean, 'true)
-    val False = TypeAst.Select.Names ('sdk, 'boolean, 'false)
+    val Bool = Types.Select.Names ('sdk, 'boolean)
+    val True = Types.Select.Names ('sdk, 'boolean, 'true)
+    val False = Types.Select.Names ('sdk, 'boolean, 'false)
 
-    val Person = TypeAst.Select.Names ('my, 'domain, 'person)
-    val Name = TypeAst.Select.Names ('my, 'domain, 'name)
+    val Person = Types.Select.Names ('my, 'domain, 'person)
+    val Name = Types.Select.Names ('my, 'domain, 'name)
 
-    val File = TypeAst.Select.Names ('os, 'file_system, 'file)
-    val String = TypeAst.Select.Names ('sdk, 'string)
+    val File = Types.Select.Names ('os, 'file_system, 'file)
+    val String = Types.Select.Names ('sdk, 'string)
 
-    val funcs : Set [(Name, TypeAst.Function)] = Set (
-        'or -> TypeAst.Function (Bool, Bool),
-        'not -> TypeAst.Function (True, False),
-        'name -> TypeAst.Function (Person, Name),
-        'name -> TypeAst.Function (File, String),
-        'negate -> TypeAst.Function (Integer, Integer),
-        'young -> TypeAst.Function (Person, Bool),
-        'old -> TypeAst.Function (Person, Bool)
+    val funcs : Set [(Name, Types.Function)] = Set (
+        'or -> Types.Function (Bool, Bool),
+        'not -> Types.Function (True, False),
+        'name -> Types.Function (Person, Name),
+        'name -> Types.Function (File, String),
+        'negate -> Types.Function (Integer, Integer),
+        'young -> Types.Function (Person, Bool),
+        'old -> Types.Function (Person, Bool)
     )
 
 }
