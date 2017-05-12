@@ -23,6 +23,16 @@ object Types extends Ast {
 
     case class Module (childTypes : Map [Name, Exp]) extends Type
 
+    object TaggedUnion {
+        def apply (subTypes : (Name, Exp)*) : TaggedUnion =
+            TaggedUnion (ListMap (subTypes : _*))
+    }
+
+    object Record {
+        def apply (subTypes : (Name, Exp)*) : Record =
+            Record (ListMap (subTypes : _*))
+    }
+
     case object Bottom extends Type
 
 }
