@@ -11,11 +11,11 @@ object Types extends Ast {
 
     case class Unit (path : Seq [Name]) extends Type
 
-    case class TaggedUnion (subTypes : ListMap[Name, Exp]) extends Type
+    case class TaggedUnion (subTypes : Map[Name, Exp]) extends Type
 
     case class Union (values: Seq [Exp]) extends Type
 
-    case class Record (fields : ListMap[Name, Exp]) extends Type
+    case class Record (fields : Map[Name, Exp]) extends Type
 
     case class Tuple (elems: Seq [Exp]) extends Type
 
@@ -31,6 +31,11 @@ object Types extends Ast {
     object Record {
         def apply (subTypes : (Name, Exp)*) : Record =
             Record (ListMap (subTypes : _*))
+    }
+
+    object Module {
+        def apply (subTypes : (Name, Exp)*) : Module =
+            Module (ListMap (subTypes : _*))
     }
 
     case object Bottom extends Type

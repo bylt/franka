@@ -5,20 +5,21 @@ import franka.lang.Types._
 object model {
 
     val typeExp =
-        Module (Map (
+        Module (
             'franka ->
-                Module (Map (
+                Literal (
+                    Module (
                     'name ->
-                        Record (Seq (
+                        Record (
                             'words ->
                                 Apply (
                                     Select.Names ('franka, 'sdk, 'seq),
                                     Select.Names ('franka, 'sdk, 'string)
                                 )
-                        )),
+                        ),
                     'lang ->
                         lang.model.typeExp
                 ))
-        ))
+        )
 
 }

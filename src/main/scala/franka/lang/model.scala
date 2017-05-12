@@ -6,56 +6,58 @@ import franka.lang.Types._
 object model {
 
     val typeExp =
-        Module (Map (
+        Module (
             'ast ->
                 Lambda (
                     'data,
-                    Module (Map (
+                    Module (
                         'exp ->
-                            TaggedUnion (Seq (
+                            Literal (
+                                TaggedUnion (
                                 'literal ->
-                                    Record (Seq (
+                                    Record (
                                         'data ->
                                             Ident ('data)
-                                    )),
+                                    ),
                                 'ident ->
-                                    Record (Seq (
+                                    Record (
                                         'name ->
                                             Select.Names ('franka, 'name)
-                                    )),
+                                    ),
                                 'apply ->
-                                    Record (Seq (
+                                    Record (
                                         'fun ->
                                             Ident ('exp),
                                         'arg ->
                                             Ident ('exp)
-                                    )),
+                                    ),
                                 'lambda ->
-                                    Record (Seq (
+                                    Record (
                                         'arg_name ->
                                             Select.Names ('franka, 'name),
                                         'body ->
                                             Ident ('exp)
-                                    ))
-                            ))
-                    ))
+                                    )
+                                )
+                            )
+                    )
                 ),
             'types ->
                 Apply (
                     Select.Names ('franka, 'lang, 'ast),
-                    TaggedUnion (Seq (
+                    TaggedUnion (
                         'bottom ->
-                            Record (Seq.empty),
+                            Record (),
                         'unit ->
-                            Record (Seq (
+                            Record (
                                 'path ->
                                     Apply (
                                         Select.Names ('franka, 'sdk, 'seq),
                                         Select.Names ('franka, 'name)
                                     )
-                            )),
+                            ),
                         'tagged_union ->
-                            Record (Seq (
+                            Record (
                                 'sub_types ->
                                     Apply (
                                         Select.Names ('franka, 'sdk, 'seq),
@@ -64,17 +66,17 @@ object model {
                                             Ident ('exp)
                                         ))
                                     )
-                            )),
+                            ),
                         'union ->
-                            Record (Seq (
+                            Record (
                                 'values ->
                                     Apply (
                                         Select.Names ('franka, 'sdk, 'seq),
                                         Ident ('exp)
                                     )
-                            )),
+                            ),
                         'record ->
-                            Record (Seq (
+                            Record (
                                 'fields ->
                                     Apply (
                                         Select.Names ('franka, 'sdk, 'seq),
@@ -83,38 +85,38 @@ object model {
                                             Ident ('exp)
                                         ))
                                     )
-                            )),
+                            ),
                         'tuple ->
-                            Record (Seq (
+                            Record (
                                 'elems ->
                                     Apply (
                                         Select.Names ('franka, 'sdk, 'seq),
                                         Ident ('exp)
                                     )
-                            )),
+                            ),
                         'function ->
-                            Record (Seq (
+                            Record (
                                 'from ->
                                     Ident ('exp),
                                 'to ->
                                     Ident ('exp)
-                            )),
+                            ),
                         'module ->
-                            Record (Seq (
+                            Record (
                                 'child_types ->
                                     Apply.Curry (
                                         Select.Names ('franka, 'sdk, 'map),
                                         Select.Names ('franka, 'name),
                                         Ident ('exp)
                                     )
-                            ))
-                    ))
+                            )
+                    )
                 ),
             'values ->
                 Apply (
                     Select.Names ('franka, 'lang, 'ast),
                     Bottom
                 )
-        ))
+        )
 
 }
