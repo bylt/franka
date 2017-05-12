@@ -1,5 +1,7 @@
 package franka.api
 
+import scala.language.reflectiveCalls
+
 class ApiTest {
 
     val lib = new MutableLibrary

@@ -1,9 +1,8 @@
 package franka
 package lang
 
-/**
-  *
-  */
+import scala.language.implicitConversions
+
 abstract class Ast {
 
     type Data
@@ -17,6 +16,17 @@ abstract class Ast {
     case class Ident (name : Name) extends Exp
 
     case class Apply (fun : Exp, arg : Exp) extends Exp
+
+    case class Lambda (argName : Name, body : Exp) extends Exp
+
+    /** A [[Select]] node allows you to select a specific field of a [[Types.Record]] value.
+      *
+      * @param target the target expression
+      * @param tag    the name of the field to select
+      */
+    case class Select (target : Exp, tag : Name) extends Exp
+
+    case class Let (binding : (Name, Exp), in : Exp) extends Exp
 
     object Apply {
 
@@ -40,15 +50,6 @@ abstract class Ast {
         }
 
     }
-
-    case class Lambda (argName : Name, body : Exp) extends Exp
-
-    /** A [[Select]] node allows you to select a specific field of a [[Types.Record]] value.
-      *
-      * @param target the target expression
-      * @param tag the name of the field to select
-      */
-    case class Select (target : Exp, tag : Name) extends Exp
 
     object Select {
 
@@ -85,8 +86,6 @@ abstract class Ast {
         }
 
     }
-
-    case class Let (binding : (Name, Exp), in : Exp) extends Exp
 
 }
 
