@@ -51,6 +51,29 @@ abstract class Ast {
 
     }
 
+    object Lambda {
+
+        object Curry {
+
+            def apply (args : Seq[Name], body : Exp) : Exp =
+                args match {
+                    case Seq (arg) =>
+                        Lambda (arg, body)
+                    case args =>
+                        Lambda (args.head, apply (args.tail, body))
+                }
+
+            def unapply (exp : Exp) : Option[(Seq[Name], Exp)] =
+                Some (exp) collect {
+                    case Lambda (argHead, Curry (argTail, body)) =>
+                        (argHead +: argTail, body)
+                    case Lambda (arg, body) =>
+                        (Seq (arg), body)
+                }
+        }
+
+    }
+
     object Select {
 
         object Names {
