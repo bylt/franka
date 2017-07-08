@@ -6,27 +6,26 @@ import franka.lang.Types._
 package object sdk {
 
     val booleanType =
-        TaggedUnion (
-            'true  -> Literal (Unit (Seq ('franka, 'sdk, 'boolean, 'true))),
-            'false -> Literal (Unit (Seq ('franka, 'sdk, 'boolean, 'false)))
+        taggedUnion (
+            'true  -> unit ('franka, 'lang, 'sdk, 'boolean, 'true),
+            'false -> unit ('franka, 'lang, 'sdk, 'boolean, 'false)
         )
 
     val integerType =
-        Select.Names ('franka, 'sdk, 'integer)
+        sel ('franka, 'lang, 'sdk, 'integer)
 
     val decimalType =
-        Record (
+        record (
             'unscaled_value -> integerType,
             'scale          -> integerType
         )
 
     val optionType =
-        Lambda (
-            'elemType,
-            Union (Seq (
-                Ident ('elemType),
+        lam ('elemType) {
+            union (
+                'elemType,
                 Bottom
-            ))
-        )
+            )
+        }
 
 }

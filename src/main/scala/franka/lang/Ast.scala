@@ -10,10 +10,11 @@ abstract class Ast {
     sealed trait Exp
 
     case class Literal (data : Data) extends Exp
-
     implicit def dataToLiteral (data : Data) : Exp = Literal (data)
 
     case class Ident (name : Name) extends Exp
+    implicit def nameToIdent (name : Name) : Ident = Ident (name)
+    implicit def symbolToIdent (name : Symbol) : Ident = Ident (name)
 
     case class Apply (fun : Exp, arg : Exp) extends Exp
 
@@ -50,6 +51,8 @@ abstract class Ast {
         }
 
     }
+    def app (fun: Exp, args: Exp*) : Exp =
+        Apply.Curry (fun, args : _*)
 
     object Lambda {
 
@@ -73,6 +76,8 @@ abstract class Ast {
         }
 
     }
+    def lam (args : Name*)(body : Exp) : Exp =
+        Lambda.Curry (args, body)
 
     object Select {
 
@@ -109,6 +114,8 @@ abstract class Ast {
         }
 
     }
+    def sel (path    : Name*) : Exp =
+        Select.Names (path : _*)
 
 }
 

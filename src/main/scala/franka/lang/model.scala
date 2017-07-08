@@ -6,115 +6,112 @@ import franka.lang.Types._
 object model {
 
     val typeExp =
-        Module (
+        module (
             'ast ->
-                Lambda (
-                    'data,
-                    Module (
+                lam ('data) {
+                    module (
                         'exp ->
                             Literal (
-                                TaggedUnion (
-                                'literal ->
-                                    Record (
-                                        'data ->
-                                            Ident ('data)
-                                    ),
+                                taggedUnion (
+                                'literal -> record (
+                                    'data -> 'data
+                                ),
                                 'ident ->
-                                    Record (
+                                    record (
                                         'name ->
-                                            Select.Names ('franka, 'name)
+                                            sel ('franka, 'name)
                                     ),
-                                'apply ->
-                                    Record (
+                                'app ->
+                                    record (
                                         'fun ->
-                                            Ident ('exp),
+                                            'exp,
                                         'arg ->
-                                            Ident ('exp)
+                                            'exp
                                     ),
                                 'lambda ->
-                                    Record (
+                                    record (
                                         'arg_name ->
-                                            Select.Names ('franka, 'name),
+                                            sel ('franka, 'name),
                                         'body ->
-                                            Ident ('exp)
+                                            'exp
                                     )
                                 )
                             )
                     )
-                ),
+                },
             'types ->
-                Apply (
-                    Select.Names ('franka, 'lang, 'ast),
-                    TaggedUnion (
+                app (
+                    sel ('franka, 'lang, 'ast),
+                    taggedUnion (
                         'bottom ->
-                            Record (),
+                            record (),
                         'unit ->
-                            Record (
+                            record (
                                 'path ->
-                                    Apply (
-                                        Select.Names ('franka, 'sdk, 'seq),
-                                        Select.Names ('franka, 'name)
+                                    app (
+                                        sel ('franka, 'sdk, 'seq),
+                                        sel ('franka, 'name)
                                     )
                             ),
                         'tagged_union ->
-                            Record (
+                            record (
                                 'sub_types ->
-                                    Apply (
-                                        Select.Names ('franka, 'sdk, 'seq),
-                                        Tuple (Seq (
-                                            Select.Names ('franka, 'name),
-                                            Ident ('exp)
-                                        ))
+                                    app (
+                                        sel ('franka, 'sdk, 'seq),
+                                        tuple (
+                                            sel ('franka, 'name),
+                                            'exp
+                                        )
                                     )
                             ),
                         'union ->
-                            Record (
+                            record (
                                 'values ->
-                                    Apply (
-                                        Select.Names ('franka, 'sdk, 'seq),
-                                        Ident ('exp)
+                                    app (
+                                        sel ('franka, 'sdk, 'seq),
+                                        'exp
                                     )
                             ),
                         'record ->
-                            Record (
+                            record (
                                 'fields ->
-                                    Apply (
-                                        Select.Names ('franka, 'sdk, 'seq),
-                                        Tuple (Seq (
-                                            Select.Names ('franka, 'name),
-                                            Ident ('exp)
-                                        ))
+                                    app (
+                                        sel ('franka, 'sdk, 'seq),
+                                        tuple (
+                                            sel ('franka, 'name),
+                                            'exp
+                                        )
                                     )
                             ),
                         'tuple ->
-                            Record (
+                            record (
                                 'elems ->
-                                    Apply (
-                                        Select.Names ('franka, 'sdk, 'seq),
-                                        Ident ('exp)
+                                    app (
+                                        sel ('franka, 'sdk, 'seq),
+                                        'exp
                                     )
                             ),
                         'function ->
-                            Record (
+                            record (
                                 'from ->
-                                    Ident ('exp),
+                                    'exp,
                                 'to ->
-                                    Ident ('exp)
+                                    'exp
                             ),
                         'module ->
-                            Record (
+                            record (
                                 'child_types ->
-                                    Apply.Curry (
-                                        Select.Names ('franka, 'sdk, 'map),
-                                        Select.Names ('franka, 'name),
-                                        Ident ('exp)
+                                    app (
+                                        sel ('franka, 'sdk, 'map),
+                                        sel ('franka, 'name),
+                                        'exp
                                     )
                             )
                     )
                 ),
             'values ->
-                Apply (
-                    Select.Names ('franka, 'lang, 'ast),
+                app (
+                    sel ('franka, 'lang, 'ast),
                     Bottom
                 )
         )
