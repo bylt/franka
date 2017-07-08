@@ -7,8 +7,8 @@ package object sdk {
 
     val booleanType =
         taggedUnion (
-            'true  -> unit ('franka, 'lang, 'sdk, 'boolean, 'true),
-            'false -> unit ('franka, 'lang, 'sdk, 'boolean, 'false)
+            'true  -> unit,
+            'false -> unit
         )
 
     val integerType =

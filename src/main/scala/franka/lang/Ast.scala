@@ -117,5 +117,30 @@ abstract class Ast {
     def sel (path    : Name*) : Exp =
         Select.Names (path : _*)
 
+    object Let {
+
+        object Curry {
+
+            def apply (bindings : Seq[(Name, Exp)], in : Exp) : Exp =
+                bindings match {
+                    case Seq (binding) =>
+                        Let (binding, in)
+                    case other =>
+                        Let (other.head, apply (other.tail, in))
+                }
+
+            def unapply (exp : Exp) : Option [(Seq[(Name, Exp)], Exp)] =
+                Some (exp) collect {
+                    case Let (head, Curry (tail, in)) =>
+                        (head +: tail, in)
+                    case Let (binding, in) =>
+                        (Seq (binding), in)
+                }
+        }
+
+    }
+    def let (bindings : (Name, Exp)*) (in : Exp) : Exp =
+        Let.Curry (bindings, in)
+
 }
 

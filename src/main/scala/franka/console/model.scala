@@ -10,7 +10,8 @@ object model {
             'scoped -> taggedUnion (
                 'on_module_type -> taggedUnion (
                     'add_type -> record (
-                        'name -> sel ('franka, 'name)
+                        'name -> sel ('franka, 'name),
+                        'init -> sel ('franka, 'lang, 'types, 'type)
                     )
                 )
             )

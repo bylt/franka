@@ -9,7 +9,7 @@ object Types extends Ast {
 
     sealed trait Type
 
-    case class Unit (path : Seq [Name]) extends Type
+    case object Unit extends Type
 
     case class TaggedUnion (subTypes : Map[Name, Exp]) extends Type
 
@@ -23,20 +23,19 @@ object Types extends Ast {
 
     case class Module (childTypes : Map [Name, Exp]) extends Type
 
-    def unit (path : Name*) : Unit =
-        Unit (path)
+    val unit = Unit
 
-    def taggedUnion (subTypes : (Name, Exp)*) : TaggedUnion =
-        TaggedUnion (ListMap (subTypes : _*))
+    def taggedUnion (headType : (Name, Exp), tailTypes : (Name, Exp)*) : TaggedUnion =
+        TaggedUnion (ListMap (headType +: tailTypes : _*))
 
-    def union (values : Exp*) : Union =
-        Union (values)
+    def union (headValue : Exp, tailValues : Exp*) : Union =
+        Union (headValue +: tailValues)
 
-    def record (subTypes : (Name, Exp)*) : Record =
-        Record (ListMap (subTypes : _*))
+    def record (headType : (Name, Exp), tailTypes : (Name, Exp)*) : Record =
+        Record (ListMap (headType +: tailTypes : _*))
 
-    def tuple (elems : Exp*) : Tuple =
-        Tuple (elems)
+    def tuple (elem1 : Exp, elem2 : Exp, elems : Exp*) : Tuple =
+        Tuple (elem1 +: elem2 +: elems)
 
     def module (subTypes : (Name, Exp)*) : Module =
         Module (ListMap (subTypes : _*))
