@@ -7,7 +7,7 @@ object ScalaTypeMapperTest extends scala.App {
 
     val m = new ScalaTypeMapper ()
 
-    val t = m.mapType (TypeContext (Literal (franka.model.typeExp)))
+    val t = m.typeDecl (TypeContext (Literal (franka.model.typeExp)))
 
     println (t)
 

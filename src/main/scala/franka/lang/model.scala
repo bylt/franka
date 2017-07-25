@@ -90,11 +90,12 @@ object model {
                         )
                 )
             ),
-            'values ->
-                app (
+            'values -> module (
+                'exp -> app (
                     sel ('franka, 'lang, 'ast),
                     Bottom
                 )
+            )
         )
 
 }

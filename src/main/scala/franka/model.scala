@@ -12,7 +12,7 @@ object model {
                     sel ('franka, 'sdk, 'string)
                 )
             ),
-            'lang -> lang.model.typeExp,
+            //'lang -> lang.model.typeExp,
             'console -> console.model.typeExp
         )
     )
